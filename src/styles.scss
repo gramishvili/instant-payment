@@ -1,1 +1,201 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+// Include the common styles for Angular Material
+@include mat.core();
+
+// Define a dark theme palette
+$primary-color: #7C4DFF; // Vibrant purple
+$accent-color: #00E5FF; // Cyan accent
+$warn-color: #FF5252; // Red warning
+
+// Custom color variables
+:root {
+  // Main colors
+  --primary-color: #{$primary-color};
+  --accent-color: #{$accent-color};
+  --warn-color: #{$warn-color};
+  
+  // Dark theme colors
+  --bg-dark: #121212;
+  --bg-card: #1E1E1E;
+  --bg-elevated: #2D2D2D;
+  --text-primary: rgba(255, 255, 255, 0.87);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-disabled: rgba(255, 255, 255, 0.38);
+  --border-color: rgba(255, 255, 255, 0.12);
+  
+  // Status colors
+  --status-pending: #FFC107;
+  --status-completed: #4CAF50;
+  --status-failed: #FF5252;
+  --status-cancelled: #9E9E9E;
+}
+
+// Override Material components with our custom colors
+.mat-mdc-button.mat-primary,
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-fab.mat-primary,
+.mat-mdc-mini-fab.mat-primary {
+  background-color: var(--primary-color);
+}
+
+.mat-mdc-button.mat-primary,
+.mat-mdc-icon-button.mat-primary,
+.mat-mdc-stroked-button.mat-primary {
+  color: var(--primary-color);
+}
+
+// Global styles
+html, body { 
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-dark);
+}
+
+// Material overrides for dark theme
+.mat-mdc-card {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.mat-mdc-table {
+  background-color: var(--bg-card);
+}
+
+.mat-mdc-cell, .mat-mdc-header-cell {
+  color: var(--text-primary);
+}
+
+.mat-mdc-paginator {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.mat-mdc-form-field-label {
+  color: var(--text-secondary);
+}
+
+.mat-mdc-form-field-outline {
+  color: var(--border-color);
+}
+
+.mat-mdc-form-field-input {
+  color: var(--text-primary);
+}
+
+.mat-mdc-select-value {
+  color: var(--text-primary);
+}
+
+.mat-mdc-select-arrow {
+  color: var(--text-secondary);
+}
+
+.mat-mdc-option {
+  color: var(--text-primary);
+}
+
+.mat-mdc-option:hover:not(.mat-mdc-option-disabled) {
+  background-color: var(--bg-elevated);
+}
+
+// Common utility classes
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.mt-3 {
+  margin-top: 1.5rem;
+}
+
+.p-1 {
+  padding: 0.5rem;
+}
+
+.p-2 {
+  padding: 1rem;
+}
+
+.p-3 {
+  padding: 1.5rem;
+}
+
+// Status badges
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+// Status colors
+.status-1 {
+  background-color: var(--status-pending);
+  color: #000;
+}
+
+.status-2 {
+  background-color: var(--status-completed);
+  color: #fff;
+}
+
+.status-3 {
+  background-color: var(--status-failed);
+  color: #fff;
+}
+
+.status-4 {
+  background-color: var(--status-cancelled);
+  color: #fff;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}

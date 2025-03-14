@@ -1,0 +1,56 @@
+<div class="app-container" [class.sidebar-open]="isSidebarOpen">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1 class="app-title">Modern Dashboard</h1>
+      <button mat-icon-button class="sidebar-toggle" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a routerLink="/dashboard" routerLinkActive="active">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/transactions" routerLinkActive="active">
+            <mat-icon>swap_horiz</mat-icon>
+            <span>Transactions</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/settings" routerLinkActive="active">
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="header">
+      <button mat-icon-button class="mobile-menu-toggle" (click)="toggleSidebar()" aria-label="Toggle menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="header-actions">
+        <button mat-icon-button aria-label="Notifications">
+          <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="User menu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

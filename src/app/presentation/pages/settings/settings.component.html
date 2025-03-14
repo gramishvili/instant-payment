@@ -1,0 +1,143 @@
+<div class="settings-container">
+  <h1 class="page-title">Settings & Administration</h1>
+  
+  <!-- Certificate Management Section -->
+  <section class="settings-section">
+    <h2 class="section-title">Certificate Management</h2>
+    <p class="section-description">
+      Upload and download certificates for authorized banks. These certificates are used for secure communication.
+    </p>
+    
+    <!-- Upload Certificate Card -->
+    <mat-card class="settings-card">
+      <mat-card-header>
+        <mat-card-title>Upload Certificate</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="certificateForm" (ngSubmit)="uploadCertificate()" class="certificate-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Bank</mat-label>
+            <mat-select formControlName="bankId">
+              <mat-option *ngFor="let bank of authorizedBanks" [value]="bank.id">
+                {{ bank.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="certificateForm.get('bankId')?.hasError('required')">
+              Bank is required
+            </mat-error>
+          </mat-form-field>
+          
+          <div class="file-upload">
+            <button type="button" mat-stroked-button (click)="fileInput.click()">
+              <mat-icon>attach_file</mat-icon>
+              Select Certificate File
+            </button>
+            <input #fileInput type="file" (change)="onFileSelected($event)" style="display: none">
+            <span class="file-name" *ngIf="selectedFile">{{ selectedFile.name }}</span>
+          </div>
+          
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit" 
+            [disabled]="certificateForm.invalid || !selectedFile || isUploading"
+          >
+            <mat-icon>cloud_upload</mat-icon>
+            Upload Certificate
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    
+    <!-- Download Certificates Card -->
+    <mat-card class="settings-card">
+      <mat-card-header>
+        <mat-card-title>Download Certificates</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="certificates-list">
+          <mat-list>
+            <mat-list-item *ngFor="let bank of authorizedBanks">
+              <div class="certificate-item">
+                <div class="bank-info">
+                  <h3 class="bank-name">{{ bank.name }}</h3>
+                  <span class="bank-id">ID: {{ bank.id }}</span>
+                </div>
+                <button 
+                  mat-raised-button 
+                  color="accent" 
+                  (click)="downloadCertificate(bank.id, bank.name)"
+                  [disabled]="isDownloading"
+                >
+                  <mat-icon>cloud_download</mat-icon>
+                  Download
+                </button>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+  
+  <!-- Application Settings Section -->
+  <section class="settings-section">
+    <h2 class="section-title">Application Settings</h2>
+    <p class="section-description">
+      Configure application-wide settings and preferences.
+    </p>
+    
+    <!-- Theme Settings Card -->
+    <mat-card class="settings-card">
+      <mat-card-header>
+        <mat-card-title>Theme Settings</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="theme-settings">
+          <mat-slide-toggle checked>Enable Dark Mode</mat-slide-toggle>
+          
+          <div class="color-picker">
+            <label>Primary Color</label>
+            <div class="color-options">
+              <button 
+                class="color-option" 
+                [style.background-color]="'#6F52ED'"
+                [class.selected]="true"
+              ></button>
+              <button 
+                class="color-option" 
+                [style.background-color]="'#3F51B5'"
+              ></button>
+              <button 
+                class="color-option" 
+                [style.background-color]="'#2196F3'"
+              ></button>
+              <button 
+                class="color-option" 
+                [style.background-color]="'#009688'"
+              ></button>
+              <button 
+                class="color-option" 
+                [style.background-color]="'#4CAF50'"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    
+    <!-- Notification Settings Card -->
+    <mat-card class="settings-card">
+      <mat-card-header>
+        <mat-card-title>Notification Settings</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="notification-settings">
+          <mat-slide-toggle checked>Enable Email Notifications</mat-slide-toggle>
+          <mat-slide-toggle checked>Enable Browser Notifications</mat-slide-toggle>
+          <mat-slide-toggle>Enable Sound Alerts</mat-slide-toggle>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>
